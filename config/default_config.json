@@ -1,0 +1,19 @@
+{
+  "theme": "monochrome",
+  "cleaning": {
+    "remove_duplicates": true,
+    "drop_empty_rows": true,
+    "drop_empty_cols": true,
+    "trim_whitespace": true,
+    "clean_headers": true,
+    "header_format": "snake_case",
+    "handle_missing": "none",
+    "missing_fill_value": ""
+  },
+  "export": {
+    "default_format": "csv",
+    "csv_delimiter": ",",
+    "csv_encoding": "utf-8",
+    "include_index": false
+  }
+}
