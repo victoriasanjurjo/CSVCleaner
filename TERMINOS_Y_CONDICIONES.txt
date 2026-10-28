@@ -1,0 +1,141 @@
+================================================================================
+TÉRMINOS Y CONDICIONES DE USO Y CONTRATACIÓN DE CSVCleaner
+================================================================================
+Última actualización: 27 de octubre de 2026
+
+POR FAVOR, LEA DETENIDAMENTE ESTE DOCUMENTO ANTES DE INSTALAR, ACCEDER O UTILIZAR
+LA APLICACIÓN "CSVCleaner". EL USO DE ESTE SOFTWARE IMPLICA LA ACEPTACIÓN PLENA,
+EXPRESA E IRREVOCABLE DE LA TOTALIDAD DE LOS TÉRMINOS Y CONDICIONES AQUÍ ESTABLECIDOS.
+SI NO ESTÁ DE ACUERDO CON ESTAS CLÁUSULAS, DEBE ABSTENERSE DE UTILIZAR EL SOFTWARE.
+
+--------------------------------------------------------------------------------
+1. IDENTIFICACIÓN Y ACEPTACIÓN DE LOS TÉRMINOS
+--------------------------------------------------------------------------------
+El presente acuerdo constituye un contrato vinculante entre el Usuario final ("Usuario"
+o "Usted") y la Desarrolladora / Titular de CSVCleaner ("la Desarrolladora").
+Al descargar, instalar, ejecutar, suscribirse o hacer uso del software CSVCleaner
+(en adelante, "la Aplicación"), el Usuario declara ser mayor de edad legal en su
+jurisdicción, poseer capacidad legal para contratar y aceptar sin reservas estos
+Términos y Condiciones.
+
+--------------------------------------------------------------------------------
+2. LICENCIA DE USO
+--------------------------------------------------------------------------------
+Sujeto al cumplimiento estricto de estos términos y al pago oportuno de las cuotas
+correspondientes (en caso de planes de pago), la Desarrolladora concede al Usuario
+una licencia limitada, personal, no exclusiva, intransferible y revocable para utilizar
+la Aplicación exclusivamente conforme a su propósito previsto de procesamiento local
+de datos tabulares.
+
+--------------------------------------------------------------------------------
+3. EXENCIÓN TOTAL DE RESPONSABILIDAD POR EL USO Y DESTINO DE DATOS
+--------------------------------------------------------------------------------
+3.1. CSVCleaner es una herramienta técnica local y neutral. La Desarrolladora no tiene
+acceso, conocimiento, control ni custodia alguna sobre la naturaleza, legalidad,
+confidencialidad o contenido de los archivos y datos procesados por el Usuario.
+
+3.2. EL USUARIO ASUME LA RESPONSABILIDAD TOTAL Y EXCLUSIVA POR EL USO QUE HAGA DE LA
+APLICACIÓN Y POR CUALQUIER RESULTADO O DERIVACIÓN OBTENIDA DE ELLA. 
+
+3.3. La Desarrolladora NO se hace responsable bajo ninguna circunstancia por:
+  a) El uso indebido, erróneo, imprudente, ilícito o no autorizado que el Usuario
+     haga de la Aplicación.
+  b) Pérdida, corrupción, alteración, sobreescritura accidental o eliminación de
+     datos, archivos u hojas de cálculo.
+  c) Decisiones comerciales, financieras, legales, laborales o técnicas tomadas con
+     base en los datos procesados, limpiados o exportados por la Aplicación.
+  d) Infracciones a normativas de protección de datos personales o secretos comerciales
+     cometidas por el Usuario al manipular información de terceros.
+
+3.4. OBLIGACIÓN DE RESPALDO: Es obligación indelegable del Usuario mantener siempre
+copias de seguridad (backups) independientes, íntegras y actualizadas de sus archivos
+originales antes de someter cualquier dato a procesamiento.
+
+--------------------------------------------------------------------------------
+4. GARANTÍA "TAL CUAL" Y LIMITACIÓN ESTRICTA DE RESPONSABILIDAD
+--------------------------------------------------------------------------------
+4.1. LA APLICACIÓN SE ENTREGA "TAL CUAL" ("AS IS") Y "SEGÚN DISPONIBILIDAD" ("AS AVAILABLE"),
+SIN GARANTÍAS DE NINGÚN TIPO, YA SEAN EXPRESAS, IMPLÍCITAS O LEGALES, INCLUYENDO,
+PERO SIN LIMITARSE A, GARANTÍAS DE COMERCIABILIDAD, ADECUACIÓN PARA UN PROPÓSITO
+PARTICULAR, PRECISIÓN ININTERRUMPIDA, AUSENCIA DE ERRORES O NO INFRACCIÓN.
+
+4.2. EN LA MÁXIMA MEDIDA PERMITIDA POR LAS LEYES APLICABLES, LA DESARROLLADORA NO SERÁ
+RESPONSABLE ANTE EL USUARIO NI ANTE TERCEROS POR NINGÚN DAÑO DIRECTO, INDIRECTO,
+INCIDENTAL, ESPECIAL, PUNITIVO, EMERGENTE O CONSECUENCIAL (INCLUYENDO LUCRO CESANTE,
+PÉRDIDA DE BENEFICIOS, INTERRUPCIÓN DE LA ACTIVIDAD COMERCIAL, PÉRDIDA DE INFORMACIÓN
+O DAÑOS INFORMÁTICOS), DERIVADO DE O RELACIONADO CON EL USO, LA IMPOSIBILIDAD DE USO
+O EL RENDIMIENTO DE LA APLICACIÓN, INCLUSO SI SE HUBIERE ADVERTIDO DE LA POSIBILIDAD
+DE DICHOS DAÑOS.
+
+--------------------------------------------------------------------------------
+5. INDEMNIDAD Y BLINDAJE LEGAL
+--------------------------------------------------------------------------------
+El Usuario se compromete de manera expresa e incondicional a defender, indemnizar y
+mantener indemne a la Desarrolladora, sus colaboradores, agentes y sucesores frente a
+cualquier demanda, reclamo, acción legal, litigio, requerimiento administrativo,
+perjuicio, daño, sanción, pérdida, responsabilidad y gasto (incluyendo honorarios
+razonables de abogados y costas procesales) que surja directa o indirectamente de:
+  a) El uso o mal uso de la Aplicación por parte del Usuario.
+  b) La violación de cualquiera de las disposiciones contenidas en este documento.
+  c) La vulneración de derechos de propiedad intelectual, privacidad o datos de terceros.
+  d) El incumplimiento de cualquier ley, reglamento o normativa aplicable.
+
+--------------------------------------------------------------------------------
+6. SUSCRIPCIÓN, FACTURACIÓN Y COBRO AUTOMÁTICO
+--------------------------------------------------------------------------------
+6.1. El acceso a las funcionalidades completas o planes Premium de la Aplicación se
+proporciona bajo la modalidad de SUSCRIPCIÓN PERIÓDICA CON COBRO Y RENOVACIÓN AUTOMÁTICA.
+
+6.2. Al contratar una suscripción, el Usuario autoriza expresamente a la Desarrolladora
+(o a su procesador de pagos autorizado) a realizar cargos automáticos, periódicos y
+recurrentes a la tarjeta o medio de pago proporcionado, al inicio de cada ciclo de
+facturación (mensual, anual u otro aplicable).
+
+6.3. Las tarifas vigentes se cobran por adelantado al inicio de cada periodo de suscripción.
+
+--------------------------------------------------------------------------------
+7. POLÍTICA ESTRICTA DE NO REEMBOLSO (NO-REFUND POLICY)
+--------------------------------------------------------------------------------
+7.1. TODAS LAS TRANSACCIONES Y COBROS EFECTUADOS SON DEFINITIVOS Y NO REEMBOLSABLES.
+DADA LA NATURALEZA DIGITAL Y DE ACCESO INMEDIATO DEL SERVICIO, NO EXISTEN REEMBOLSOS,
+DEVOLUCIONES NI COMPENSACIONES TOTALES O PARCIALES DE NINGUNA ÍNDOLE UNA VEZ QUE EL
+COBRO DEL PERIODO CORRESPONDIENTE HAYA SIDO PROCESADO.
+
+7.2. NO SE OTORGARÁN REEMBOLSOS NI CRÉDITOS POR PERIODOS PARCIALMENTE UTILIZADOS,
+FALTA DE USO DEL SOFTWARE, CAMBIOS DE OPINIÓN O DESINSTALACIÓN DE LA APLICACIÓN POR
+PARTE DEL USUARIO.
+
+--------------------------------------------------------------------------------
+8. POLÍTICA Y PROCEDIMIENTO DE CANCELACIÓN
+--------------------------------------------------------------------------------
+8.1. El Usuario puede cancelar su suscripción en cualquier momento, de forma libre y
+sin penalizaciones, mediante el panel de administración de su cuenta o la plataforma
+de pagos utilizada.
+
+8.2. EFECTOS DE LA CANCELACIÓN:
+  - La cancelación detiene de forma definitiva la renovación y los futuros cobros
+    automáticos para los ciclos venideros.
+  - La cancelación realizada durante un ciclo ya cobrado NO DA DERECHO A REEMBOLSO
+    proporcional por los días restantes del mes o periodo en curso.
+  - El Usuario continuará disfrutando del acceso a la cuenta y licencia activa hasta
+    el último día del periodo de facturación efectivamente abonado. Finalizado dicho
+    periodo, la licencia y el acceso premium expirarán automáticamente.
+
+--------------------------------------------------------------------------------
+9. PROPIEDAD INTELECTUAL
+--------------------------------------------------------------------------------
+La Desarrolladora es la titular exclusiva de todos los derechos de propiedad intelectual
+e industrial sobre la Aplicación, incluyendo su código fuente, arquitectura, diseño
+visual, documentación y marcas asociadas. Se prohíbe terminantemente la descompilación,
+ingeniería inversa, copia o distribución no autorizada del software.
+
+--------------------------------------------------------------------------------
+10. MODIFICACIONES Y LEGISLACIÓN
+--------------------------------------------------------------------------------
+10.1. La Desarrolladora se reserva el derecho de actualizar o modificar estos Términos
+y Condiciones en cualquier momento. El uso continuado del software tras la publicación
+de modificaciones implicará la aceptación de los nuevos términos.
+
+10.2. Si alguna disposición de este acuerdo fuera declarada nula o inaplicable por un
+tribunal competente, las restantes cláusulas permanecerán plenamente vigentes y válidas.
+================================================================================

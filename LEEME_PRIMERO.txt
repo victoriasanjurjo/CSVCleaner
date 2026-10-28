@@ -1,0 +1,32 @@
+=========================================================
+¡Gracias por confiar en CSVCleaner!
+=========================================================
+
+Hola, soy Victoria Sanjurjo.
+
+Quiero agradecerte personalmente por adquirir esta herramienta y apoyar mi trabajo como desarrolladora de software independiente. 
+
+Diseñé CSVCleaner con un solo objetivo en mente: ahorrarte horas de trabajo manual, clics innecesarios y dolores de cabeza con los formatos. Mi filosofía de desarrollo es crear software minimalista, directo al grano y que simplemente funcione, sin funciones inútiles que te hagan perder el tiempo.
+
+--- GUÍA DE INSTALACIÓN RÁPIDA ---
+
+Usar el programa es muy sencillo y no requiere configuraciones complejas:
+
+1. Descomprimí este archivo .zip en la carpeta que prefieras de tu computadora (por ejemplo, en tu Escritorio o en Documentos).
+2. Entrá a la carpeta que acabas de extraer.
+3. Hacé doble clic en el archivo "CSVCleaner.exe" para abrir el programa.
+4. ¡Listo! Ya podés arrastrar tu primer archivo Excel o CSV para limpiarlo.
+
+*Nota de seguridad:* Como este es un software de desarrollo independiente, es posible que Windows Defender te muestre un aviso azul de "PC protegida" la primera vez que intentes abrirlo. Es un aviso automático normal. Para continuar, solo tenés que hacer clic en "Más información" y luego en "Ejecutar de todas formas".
+
+--- SOPORTE Y CONTACTO ---
+
+Si la herramienta te resulta útil, tenés alguna sugerencia, o si tu empresa necesita una solución de software a medida, no dudes en contactarme. 
+
+Email: vicky.sanjurjo.isla@gmail.com
+LinkedIn: linkedin.com/in/maría-victoria-sanjurjo-isla-81a266339
+
+¡Espero que disfrutes ese tiempo extra que te va a ahorrar la aplicación!
+
+Victoria Sanjurjo
+Desarrolladora de Software
