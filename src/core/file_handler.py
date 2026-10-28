@@ -1,28 +1,33 @@
 """
-Módulo de manejo de archivos de entrada y salida (CSV, Excel y reportes PDF).
+Módulo de manejo de archivos de entrada y salida (CSV, Excel y registros de auditoría TXT).
 """
 import os
 import csv
+from datetime import datetime
 from typing import Tuple, List, Optional, Any
 from pathlib import Path
 import pandas as pd
-
-from reportlab.lib.pagesizes import letter
-from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, HRFlowable
-from reportlab.lib.units import inch
 
 from .cleaner import CleaningReport
 
 
 class FileHandler:
     """
-    Gestor de lectura de archivos heterogéneos y exportación de datos limpios y reportes.
+    Gestor de lectura de archivos heterogéneos y exportación de datos limpios y registros TXT.
     """
 
     SUPPORTED_ENCODINGS = ['utf-8', 'utf-8-sig', 'latin-1', 'cp1252', 'iso-8859-1']
     COMMON_DELIMITERS = [',', ';', '\t', '|']
+
+    @classmethod
+    def get_downloads_directory(cls) -> Path:
+        """
+        Retorna la ruta absoluta del directorio de Descargas del usuario.
+        """
+        downloads = Path.home() / "Downloads"
+        if not downloads.exists():
+            downloads.mkdir(parents=True, exist_ok=True)
+        return downloads
 
     @classmethod
     def detect_csv_delimiter(cls, file_path: str, encoding: str = 'utf-8') -> str:
@@ -81,7 +86,7 @@ class FileHandler:
     @classmethod
     def load_file(cls, file_path: str) -> Tuple[pd.DataFrame, dict]:
         """
-        Punto de entrada universal para leer archivos CSV o Excel.
+        Punto de entrada universal para leer archivos CSV o Excel (1 archivo a la vez).
         """
         ext = Path(file_path).suffix.lower()
         metadata: dict[str, Any] = {"filepath": file_path, "filename": Path(file_path).name, "format": ext}
@@ -120,116 +125,55 @@ class FileHandler:
         return output_path
 
     @classmethod
-    def generate_pdf_report(cls, report: CleaningReport, source_name: str, output_pdf_path: str) -> str:
+    def export_txt_log(cls, report: CleaningReport, source_name: str, output_txt_path: str) -> str:
         """
-        Genera un reporte ejecutivo en PDF estructurado con la bitácora y métricas de limpieza.
-        Diseño formal y monocromático alineado a las directrices de la app.
+        Genera un archivo simple .txt con el registro de cambios y la bitácora de acciones
+        aplicadas sobre el archivo original.
         """
-        os.makedirs(os.path.dirname(os.path.abspath(output_pdf_path)), exist_ok=True)
-        doc = SimpleDocTemplate(
-            output_pdf_path,
-            pagesize=letter,
-            leftMargin=40,
-            rightMargin=40,
-            topMargin=40,
-            bottomMargin=40
-        )
+        os.makedirs(os.path.dirname(os.path.abspath(output_txt_path)), exist_ok=True)
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        styles = getSampleStyleSheet()
-        
-        # Estilos tipográficos monocromáticos
-        title_style = ParagraphStyle(
-            'ReportTitle',
-            parent=styles['Heading1'],
-            fontName='Helvetica-Bold',
-            fontSize=22,
-            leading=26,
-            textColor=colors.HexColor('#09090B'),
-            spaceAfter=6
-        )
-        subtitle_style = ParagraphStyle(
-            'ReportSubtitle',
-            parent=styles['Normal'],
-            fontName='Helvetica',
-            fontSize=11,
-            leading=14,
-            textColor=colors.HexColor('#52525B'),
-            spaceAfter=15
-        )
-        section_style = ParagraphStyle(
-            'SectionHeader',
-            parent=styles['Heading2'],
-            fontName='Helvetica-Bold',
-            fontSize=13,
-            leading=17,
-            textColor=colors.HexColor('#18181B'),
-            spaceBefore=14,
-            spaceAfter=8
-        )
-        cell_style = ParagraphStyle(
-            'TableCell',
-            parent=styles['Normal'],
-            fontName='Helvetica',
-            fontSize=10,
-            leading=13,
-            textColor=colors.HexColor('#27272A')
-        )
-        cell_header_style = ParagraphStyle(
-            'TableHeadCell',
-            parent=styles['Normal'],
-            fontName='Helvetica-Bold',
-            fontSize=10,
-            leading=13,
-            textColor=colors.HexColor('#FFFFFF')
-        )
+        diff_rows = report.rows_before - report.rows_after
+        diff_cols = report.cols_before - report.cols_after
+        diff_missing = report.missing_cells_before - report.missing_cells_after
 
-        elements = []
-
-        # Título y cabecera
-        elements.append(Paragraph("CSVCleaner - Reporte de Auditoría y Limpieza", title_style))
-        elements.append(Paragraph(f"Archivo procesado: <b>{source_name}</b>", subtitle_style))
-        elements.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor('#E4E4E7'), spaceBefore=2, spaceAfter=14))
-
-        # Sección 1: Métricas de Transformación
-        elements.append(Paragraph("1. Resumen Ejecutivo de Métricas", section_style))
-
-        metrics_data = [
-            [Paragraph("Métrica", cell_header_style), Paragraph("Antes", cell_header_style), Paragraph("Después", cell_header_style), Paragraph("Diferencia", cell_header_style)],
-            [Paragraph("Total de Filas", cell_style), Paragraph(str(report.rows_before), cell_style), Paragraph(str(report.rows_after), cell_style), Paragraph(f"-{report.rows_before - report.rows_after}", cell_style)],
-            [Paragraph("Total de Columnas", cell_style), Paragraph(str(report.cols_before), cell_style), Paragraph(str(report.cols_after), cell_style), Paragraph(f"-{report.cols_before - report.cols_after}", cell_style)],
-            [Paragraph("Celdas Vacías (NaN)", cell_style), Paragraph(str(report.missing_cells_before), cell_style), Paragraph(str(report.missing_cells_after), cell_style), Paragraph(f"-{report.missing_cells_before - report.missing_cells_after}", cell_style)],
-            [Paragraph("Filas Duplicadas Removidas", cell_style), Paragraph("-", cell_style), Paragraph(str(report.duplicates_removed), cell_style), Paragraph(str(report.duplicates_removed), cell_style)],
-            [Paragraph("Filas Vacías Descartadas", cell_style), Paragraph("-", cell_style), Paragraph(str(report.empty_rows_dropped), cell_style), Paragraph(str(report.empty_rows_dropped), cell_style)],
-            [Paragraph("Columnas Vacías Descartadas", cell_style), Paragraph("-", cell_style), Paragraph(str(report.empty_cols_dropped), cell_style), Paragraph(str(report.empty_cols_dropped), cell_style)],
+        lines = [
+            "=" * 70,
+            "CSVCleaner - REGISTRO DE CAMBIOS Y ACCIONES DE LIMPIEZA",
+            "=" * 70,
+            f"Archivo original : {source_name}",
+            f"Fecha y hora     : {timestamp}",
+            "",
+            "-" * 70,
+            "1. RESUMEN ESTADÍSTICO DE TRANSFORMACIONES",
+            "-" * 70,
+            f"• Filas totales          : {report.rows_before} (antes) -> {report.rows_after} (después) | Diferencia: -{diff_rows}",
+            f"• Columnas totales       : {report.cols_before} (antes) -> {report.cols_after} (después) | Diferencia: -{diff_cols}",
+            f"• Celdas vacías (NaN)    : {report.missing_cells_before} (antes) -> {report.missing_cells_after} (después) | Corregidas/removidas: {diff_missing}",
+            f"• Filas duplicadas       : {report.duplicates_removed} eliminadas",
+            f"• Filas vacías           : {report.empty_rows_dropped} descartadas",
+            f"• Columnas vacías        : {report.empty_cols_dropped} descartadas",
+            "",
+            "-" * 70,
+            "2. BITÁCORA DETALLADA DE OPERACIONES REALIZADAS",
+            "-" * 70,
         ]
 
-        metric_table = Table(metrics_data, colWidths=[200, 100, 100, 100])
-        metric_table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#18181B')),
-            ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#E4E4E7')),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#FFFFFF'), colors.HexColor('#F4F4F5')]),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
-            ('TOPPADDING', (0, 0), (-1, -1), 6),
-        ]))
-        elements.append(metric_table)
-        elements.append(Spacer(1, 15))
-
-        # Sección 2: Bitácora de Acciones
-        elements.append(Paragraph("2. Registro Cronológico de Operaciones", section_style))
         if report.operations_log:
-            log_data = [[Paragraph(f"• {log}", cell_style)] for log in report.operations_log]
-            log_table = Table(log_data, colWidths=[500])
-            log_table.setStyle(TableStyle([
-                ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor('#FAFAFA')),
-                ('BOX', (0, 0), (-1, -1), 0.5, colors.HexColor('#E4E4E7')),
-                ('BOTTOMPADDING', (0, 0), (-1, -1), 5),
-                ('TOPPADDING', (0, 0), (-1, -1), 5),
-            ]))
-            elements.append(log_table)
+            for i, op in enumerate(report.operations_log, start=1):
+                lines.append(f"  {i}. {op}")
         else:
-            elements.append(Paragraph("No se registraron transformaciones en los datos.", cell_style))
+            lines.append("  (No se realizaron modificaciones sobre los datos)")
 
-        doc.build(elements)
-        return output_pdf_path
+        lines.extend([
+            "",
+            "=" * 70,
+            "Fin del registro de cambios.",
+            "=" * 70,
+            ""
+        ])
+
+        with open(output_txt_path, 'w', encoding='utf-8') as f:
+            f.write("\n".join(lines))
+
+        return output_txt_path

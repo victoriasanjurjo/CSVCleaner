@@ -16,3 +16,4 @@ dist/
 # Variables de entorno y configs locales
 .env
 .env.local
+.vscode/

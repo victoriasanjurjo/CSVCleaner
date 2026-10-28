@@ -147,6 +147,35 @@ class TestFileHandler(unittest.TestCase):
             if os.path.exists(tmp_path):
                 os.remove(tmp_path)
 
+    def test_export_txt_log(self):
+        from src.core.cleaner import CleaningReport
+        report = CleaningReport(
+            rows_before=100,
+            rows_after=95,
+            cols_before=5,
+            cols_after=4,
+            duplicates_removed=3,
+            empty_rows_dropped=2,
+            empty_cols_dropped=1,
+            missing_cells_before=10,
+            missing_cells_after=2,
+            operations_log=["Eliminación de duplicados", "Trimming de texto"]
+        )
+        with tempfile.NamedTemporaryFile(suffix=".txt", delete=False) as tmp:
+            tmp_path = tmp.name
+
+        try:
+            out_file = FileHandler.export_txt_log(report, "prueba.csv", tmp_path)
+            self.assertTrue(os.path.exists(out_file))
+            with open(out_file, "r", encoding="utf-8") as f:
+                content = f.read()
+            self.assertIn("prueba.csv", content)
+            self.assertIn("100 (antes) -> 95 (después)", content)
+            self.assertIn("Eliminación de duplicados", content)
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
 
 if __name__ == "__main__":
     unittest.main()

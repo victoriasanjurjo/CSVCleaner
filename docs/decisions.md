@@ -15,31 +15,21 @@
 - **Decisión**: Extender `QAbstractTableModel` en `PandasTableModel`, limitando la ventana de renderizado activo a un umbral ágil (hasta 5,000 filas en vista previa) manteniendo la integridad completa del DataFrame en memoria para las operaciones.
 - **Justificación**: Tiempo de respuesta inmediato e instantáneo en el cambio de pestañas y manipulación de datos.
 
-## ADR-004: Inclusión de ReportLab para Auditoría en PDF
-- **Contexto**: Las normas del entorno exigen generar reportes ejecutivos en PDF dentro de `outputs/` en aplicaciones de datos.
-- **Decisión**: Integrar un generador de reportes en `FileHandler` que compila un documento PDF monocromático con la tabla de diferencias antes/después y el listado cronológico de operaciones.
-- **Justificación**: Permite a los usuarios adjuntar un registro formal de trazabilidad a sus pipelines de datos o entregables.
-
-## ADR-005: Autodetección de Delimitadores y Codificaciones en CSV
+## ADR-004: Autodetección de Delimitadores y Codificaciones en CSV
 - **Contexto**: Los archivos CSV reales provienen de múltiples fuentes (Excel en español que exporta con punto y coma `;`, sistemas Unix con comas `,`, o tabulaciones `\t`), con codificaciones diversas (UTF-8, Latin-1, CP1252).
 - **Decisión**: Usar `csv.Sniffer` sobre una muestra inicial del archivo y un mecanismo de reintento secuencial de codificaciones.
 - **Justificación**: Elimina fallos comunes de carga sin requerir que el usuario configure manualmente parámetros crípticos.
 
-## ADR-006: Selección Interactiva y Filtrado Previo de Columnas
+## ADR-005: Selección Interactiva y Filtrado Previo de Columnas
 - **Contexto**: El analista no siempre necesita todas las columnas del dataset original; requiere seleccionar qué campos conservar o descartar antes de aplicar la limpieza para extraer únicamente los datos relevantes.
-- **Decisión**: Incorporar un componente de lista de verificación (`QListWidget` con casillas interactivas, acciones masivas `Todas`/`Ninguna`/`Invertir` y buscador en tiempo real) en el panel lateral, sincronizado con la tabla de diagnóstico. El motor `DataCleaner` aplica este filtrado como primera fase del pipeline antes de la desduplicación y normalización.
+- **Decisión**: Incorporar un componente de lista de verificación (`QListWidget` con casillas interactivas, acciones masivas `Todas`/`Ninguna`/`Invertir` y buscador en tiempo real) en el panel lateral. El motor `DataCleaner` aplica este filtrado como primera fase del pipeline antes de la desduplicación y normalización.
 - **Justificación**: Proporciona control total sobre la dimensionalidad de los datos resultantes, optimizando la memoria y evitando procesar o exportar información innecesaria.
 
-## ADR-007: Reconocimiento Continuo de Voz Offline (Vosk + sounddevice)
-- **Contexto**: El usuario solicitó la funcionalidad de dictar instrucciones por voz en modo continuo y con modelo offline local.
-- **Decisión**: Integrar `vosk` con el modelo ligero en español `vosk-model-small-es-0.42` (~38 MB) y captura continua mediante `sounddevice` en un hilo desacoplado (`QThread`), parseado mediante `VoiceCommandParser`.
-- **Justificación**:
-  1. **Compatibilidad total con Python 3.15**: A diferencia de paquetes antiguos basados en PyAV/torch que fallan en la compilación de C/Cython sobre 3.15, Vosk dispone de binarios limpios precompilados.
-  2. **100% Offline**: Privacidad absoluta sin enviar audio a APIs externas.
-  3. **No bloqueante**: La captura en `QThread` no impacta los 60 FPS de la interfaz PySide6.
-  4. **Escucha Continua**: Permite hablar de corrido mientras se interactúa con el teclado o el ratón.
-
-## ADR-008: Gráficos Profesionales Embebidos (Matplotlib/Seaborn) y Reporte Ejecutivo Multi-Página
-- **Contexto**: Se requiere permitir la generación visual de gráficos estadísticos sobre las variables indicadas por el usuario (vía interfaz o voz) y la compilación de reportes ejecutivos en PDF de máxima calidad visual.
-- **Decisión**: Embeber `FigureCanvasQTAgg` y `NavigationToolbar2QT` en una pestaña dedicada de visualización, estructurando la generación mediante `DataAnalytics` y una paleta monocromática elegante (Zinc/Greys). La compilación a PDF se apoya en `ReportLab` integrando tablas `describe()` completas e imágenes renderizadas a 300 DPI.
-- **Justificación**: Brinda capacidad analítica de nivel profesional sin abandonar la aplicación, permitiendo zoom, navegación y exportación inmediata a SVG/PNG y PDF formal listo para presentaciones o auditorías.
+## ADR-006: Simplificación Radical, Eliminación de Módulos Secundarios y Destino en Descargas
+- **Contexto**: El usuario solicitó mantener la herramienta lo más simple y rápida posible, eliminando los reportes estadísticos complejos en PDF, los gráficos embebidos (matplotlib/seaborn), el reconocimiento de voz offline (vosk) y las pestañas adicionales de diagnóstico y bitácora en la GUI, así como la carpeta `outputs/`.
+- **Decisión**:
+  1. Mantener un flujo directo de 1 archivo a la vez con previsualización en 2 pestañas esenciales: **Datos Originales** y **Datos Limpios**.
+  2. Sustituir los reportes PDF por un archivo de registro `.txt` estructurado, simple y de texto plano generado automáticamente junto al archivo procesado.
+  3. Establecer como carpeta de destino predeterminada el directorio de **Descargas** del sistema (`Downloads`), eliminando por completo el directorio `outputs/`.
+  4. Mantener la regla inquebrantable de no modificación del archivo original: se trabaja y exporta siempre sobre una copia.
+- **Justificación**: Reduce el peso de dependencias en más del 80%, acelera el tiempo de arranque, simplifica la experiencia de usuario y enfoca la aplicación en su propósito primario: limpiar datos y documentar los cambios de forma clara y directa.
