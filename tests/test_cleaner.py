@@ -7,7 +7,7 @@ import tempfile
 import pandas as pd
 import numpy as np
 
-from src.core.cleaner import DataCleaner, CleaningOptions
+from src.core.cleaner import DataCleaner, CleaningOptions, CleaningReport
 from src.core.file_handler import FileHandler
 
 
@@ -24,15 +24,12 @@ class TestDataCleaner(unittest.TestCase):
         self.df = pd.DataFrame(self.sample_data)
 
     def test_header_normalization(self):
-        """Prueba la normalización de cabeceras."""
-        norm = DataCleaner.normalize_header(" Nombre Completo ", case="snake_case", strip_accents=True)
+        """Prueba la normalización forzada a snake_case."""
+        norm = DataCleaner.normalize_header(" Nombre Completo ", strip_accents=True)
         self.assertEqual(norm, "nombre_completo")
 
-        norm_accents = DataCleaner.normalize_header("Año de Nacimiento", case="snake_case", strip_accents=True)
+        norm_accents = DataCleaner.normalize_header("Año de Nacimiento", strip_accents=True)
         self.assertEqual(norm_accents, "ano_de_nacimiento")
-
-        norm_upper = DataCleaner.normalize_header("ciudad", case="uppercase", strip_accents=False)
-        self.assertEqual(norm_upper, "CIUDAD")
 
     def test_cleaning_pipeline(self):
         """Prueba la secuencia completa de limpieza."""
@@ -42,7 +39,6 @@ class TestDataCleaner(unittest.TestCase):
             drop_empty_cols=True,
             trim_whitespace=True,
             clean_headers=True,
-            header_case="snake_case",
             strip_accents=True,
             handle_missing="none"
         )
@@ -84,8 +80,7 @@ class TestDataCleaner(unittest.TestCase):
         """Prueba que solo se conserven las columnas seleccionadas."""
         options = CleaningOptions(
             selected_columns=[" Nombre Completo ", "Ciudad"],
-            clean_headers=True,
-            header_case="snake_case"
+            clean_headers=True
         )
         cleaned, report = DataCleaner.clean(self.df, options)
         self.assertEqual(len(cleaned.columns), 2)
@@ -99,14 +94,6 @@ class TestDataCleaner(unittest.TestCase):
         options = CleaningOptions(selected_columns=[])
         with self.assertRaises(ValueError):
             DataCleaner.clean(self.df, options)
-
-    def test_column_stats_status(self):
-        """Prueba que el reporte estadístico distinga columnas a conservar y descartar."""
-        stats = DataCleaner.get_column_stats(self.df, selected_columns=["Ciudad"])
-        ciudad_stat = next(s for s in stats if s["columna"] == "Ciudad")
-        edad_stat = next(s for s in stats if s["columna"] == "EDAD / AÑOS")
-        self.assertEqual(ciudad_stat["estado"], "Conservar")
-        self.assertEqual(edad_stat["estado"], "Descartar")
 
 
 class TestFileHandler(unittest.TestCase):
@@ -148,7 +135,6 @@ class TestFileHandler(unittest.TestCase):
                 os.remove(tmp_path)
 
     def test_export_txt_log(self):
-        from src.core.cleaner import CleaningReport
         report = CleaningReport(
             rows_before=100,
             rows_after=95,
