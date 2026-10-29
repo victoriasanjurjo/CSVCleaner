@@ -111,8 +111,18 @@ python main.py
 python -m unittest discover tests
 ```
 
+### 5. Compilación del ejecutable (.exe independiente)
+
+Para compilar un archivo ejecutable directo sin necesidad de instalador:
+
+```bash
+pyinstaller CSVCleaner.spec --noconfirm --clean
+```
+
+El ejecutable resultante estará disponible en [dist/CSVCleaner.exe](file:///d:/Proyectos/Repos/CSVCleaner/dist/CSVCleaner.exe).
+
 ---
 
 ## Licencia
 
-Distribuido bajo la Licencia MIT. Consulte [LICENSE.txt](LICENSE.txt) para más información.
+Distribuido bajo la Licencia MIT. Consulte [LICENSE.txt](file:///d:/Proyectos/Repos/CSVCleaner/LICENSE.txt) para más información.

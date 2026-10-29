@@ -23,7 +23,7 @@ def main():
     app.setOrganizationName("CSVCleaner")
 
     # Cargar ícono de aplicación
-    base_dir = Path(__file__).resolve().parent
+    base_dir = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
     icon_path = base_dir / "assets" / "icon.png"
     if icon_path.exists():
         app.setWindowIcon(QIcon(str(icon_path)))

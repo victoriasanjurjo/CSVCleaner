@@ -110,7 +110,8 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(800, 500)
 
         # Cargar ícono de la aplicación
-        icon_path = Path(__file__).resolve().parent.parent.parent / "assets" / "icon.png"
+        base_dir = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent.parent.parent))
+        icon_path = base_dir / "assets" / "icon.png"
         if icon_path.exists():
             self.setWindowIcon(QIcon(str(icon_path)))
 
